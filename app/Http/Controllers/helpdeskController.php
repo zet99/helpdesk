@@ -15,6 +15,7 @@ use DB;
 use PDF;
 use Lava;
 
+
 class helpdeskController extends Controller
 {
     /**
@@ -116,32 +117,46 @@ class helpdeskController extends Controller
 
     public function laporan()
     {
-        $aduan = aduan::select(DB::raw('count(*) as hasil, status'))->groupBy('created_at')->groupBy('status')->get();
+        $aduan = aduan::select(DB::raw("DATE_FORMAT(DATE(created_at),'%Y-%m') as date, count(*) as hasil, `status`"))
+            ->groupBy('date','status')->orderBy('date')->get();
         $data = Lava::dataTable();
 
         $data->addDateColumn('Month of Year')
-            ->addNumberColumn('Belum Selesai')
+            ->addNumberColumn('Selesai')
             ->addNumberColumn('Lanjut')
-            ->addNumberColumn('Selesai');
+            ->addNumberColumn('Belum Selesai');
 
             // Random Data For Example
+            $tg = "";
+            $isi = array();
+            $n =1;
             foreach ($aduan as $a) {
-                $data->addRow([
-                  $a->created_at, rand(800,1000), rand(800,1000), rand(800,1000)
-                ]);
+                $i=0;
+                if ($tg!="" && $tg !=$a['date']) {
+                    $data->addRow($isi);
+                    $isi = array();
+                    $n=1;
+                }
+                $isi[0] = $a['date']."-1";
+                $i = $a['status'];
+                $isi[$i+1] = $a['hasil'];
+                $n++;
+                $tg = $a['date'];
             }
+            $data->addRow($isi);
 
         $chart = Lava::ColumnChart('Grafik Aduan Bulanan', $data, [
                 'titleTextStyle' => [
                     'fontName' => 'Arial',
                     'fontColor' => 'blue'
                 ],
+                'height'=>500,
+                'title'=>'Grafik Pengaduan Gangguan',
                 'legend' => [
-                    'position' => 'top'
+                    'position' => 'bottom'
                 ]
             ]);
-        $chart = Lava::render( "ColumnChart", "Grafik Aduan Bulanan", "blank" );
-        return view('form_laporan',['cart' => $chart]);
+        return view('form_laporan');
     }
 
     public function cetakLap(Request $req)

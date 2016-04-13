@@ -59,5 +59,5 @@ class="active"
 		}
 	}
 </script>
-{!! $cart !!}
+@columnchart('Grafik Aduan Bulanan', 'blank')
 @endsection

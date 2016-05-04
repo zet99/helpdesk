@@ -53,11 +53,18 @@
 											<i class="glyphicon glyphicon-lock"></i>Login</a>
 										</li>
 										@else
-									<li>
-										<a href="{{url('auth/logout')}}">
-											<i class="glyphicon glyphicon-off"></i> Logout
-										</a>
-									</li>
+										<li class="dropdown">
+								          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								          <i class="glyphicon glyphicon-user"></i> User <span class="caret"></span></a>
+								          <ul class="dropdown-menu">
+											<li><a href="{{url('user')}}"><i class="glyphicon glyphicon-plus-sign"></i> Tambah User</a>
+											</li>
+											<li><a href="{{url('user')}}/{{ Auth::user()->id }}"><i class="glyphicon glyphicon-wrench"></i> Ganti Password</a>
+											</li>
+								          	<li><a href="{{url('auth/logout')}}"><i class="glyphicon glyphicon-off"></i> Logout</a>
+											</li>
+								          </ul>
+								        </li>
 										@endif
 									</ul>
 								</div><!-- /.navbar-collapse -->

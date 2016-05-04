@@ -19,4 +19,5 @@ Route::group(['middleware' => array('auth')], function(){
 	Route::post('laporan', 'helpdeskController@cetakLap');
 	Route::get('daftar', 'helpdeskController@daftar');
 	Route::get('lihatDetail/{id}', 'helpdeskController@lihatDetail');
+	Route::resource('user','UserController');
 });

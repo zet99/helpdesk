@@ -28,7 +28,7 @@ class="active"
 			<th>Tujuan</th>
 			<th>Tanggal</th>
 			<th>Status</th>
-			<th>Detail Pengerjaan</th>
+			<th colspan="2">Detail Pengerjaan</th>
 		</tr>
 		@foreach($aduans as $adu)
 		<tr>
@@ -50,6 +50,10 @@ class="active"
 				<button class="btn btn-primary" onclick="tindak('{{$adu->id}}')">
 				<i class="glyphicon glyphicon-share-alt"></i>
 				Kerjakan</button>
+				
+			</td>
+			<td>
+				<a href="" target="_blank" class="btn btn-info"><i class="glyphicon glyphicon-print"></i> Cetak SPK</a>
 			</td>
 		</tr>
 			@endforeach

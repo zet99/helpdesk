@@ -53,7 +53,7 @@ class="active"
 				
 			</td>
 			<td>
-				<a href="" target="_blank" class="btn btn-info"><i class="glyphicon glyphicon-print"></i> Cetak SPK</a>
+				<a href="{{url('cetak_surat')}}/{{$adu->id}}" target="_blank" class="btn btn-info"><i class="glyphicon glyphicon-print"></i> Cetak SPK</a>
 			</td>
 		</tr>
 			@endforeach

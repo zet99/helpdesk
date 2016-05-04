@@ -182,4 +182,12 @@ class helpdeskController extends Controller
         return view('detail',['tindakan'=>$tin]);
     }
 
+    public function surat_spk($id)
+    {
+        $data = aduan::find($id);
+        $pdf = PDF::loadView('laporan.skl',['data'=>$data])
+            ->setPaper('a4');
+        return $pdf->inline(date("Y-m-d").'.pdf');
+    }
+
 }

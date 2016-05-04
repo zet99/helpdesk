@@ -20,4 +20,5 @@ Route::group(['middleware' => array('auth')], function(){
 	Route::get('daftar', 'helpdeskController@daftar');
 	Route::get('lihatDetail/{id}', 'helpdeskController@lihatDetail');
 	Route::resource('user','UserController');
+	Route::get('cetak_surat/{id}', 'helpdeskController@surat_spk');
 });

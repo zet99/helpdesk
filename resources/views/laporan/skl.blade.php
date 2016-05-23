@@ -56,14 +56,14 @@
 	<?php 
 		$path = 'gambar/LogoBatang1.png';
 		$type = pathinfo($path, PATHINFO_EXTENSION);
-		$data = file_get_contents($path);
-		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+		$x = file_get_contents($path);
+		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($x);
 		$no = 1;
 	 ?>
 <div class="h">
 	<h2 class="m">Surat Perintah Kerja</h2>
 	<h3 class="m">Koordinasi, Konsultasi dan Bantuan (Helpdesk) E-Government</h3>
-	<h4 class="m">No Tiket : {{$data}}</h4>
+	<h4 class="m">No Tiket : <?php echo $data['id'] ?></h4>
 </div>
 <div class="h">
 <br>
@@ -76,23 +76,23 @@
 	</tr>
 	<tr>
 		<td>Nama Pemohon</td>
-		<td></td>
+		<td><?php echo $data['nama_pemohon'] ?></td>
 	</tr>
 	<tr>
 		<td>Jabatan Pemohon</td>
-		<td></td>
+		<td><?php echo $data['jabatan_pemohon'] ?></td>
 	</tr>
 	<tr>
 		<td>No Hp</td>
-		<td></td>
+		<td><?php echo $data['no_hp'] ?></td>
 	</tr>
 	<tr>
 		<td>SKPD</td>
-		<td></td>
+		<td><?php echo $data['id_skpd'] ?></td>
 	</tr>
 	<tr>
 		<td>Tujuan/ Keperluan</td>
-		<td></td>
+		<td><?php echo $data['tujuan'] ?></td>
 	</tr>
 	<tr>
 		<td>Diterima Oleh</td>
@@ -100,7 +100,7 @@
 	</tr>
 	<tr>
 		<td>Tanggal</td>
-		<td></td>
+		<td><?php echo $data['created_at'] ?></td>
 	</tr>
 	<tr>
 		<td>Sarana</td>

@@ -13,6 +13,7 @@ use Validator;
 use Auth;
 use DB;
 use PDF;
+use View;
 use Lava;
 
 
@@ -160,7 +161,7 @@ class helpdeskController extends Controller
     }
 
     public function cetakLap(Request $req)
-    {
+    { 
        $peng = aduan::with('penangananAll')
             ->with('skpd')
             ->whereBetween('created_at',array( str_replace("-", "\\", $req->awal) , str_replace("-", "\\", $req->akhir)  ))
@@ -185,9 +186,11 @@ class helpdeskController extends Controller
     public function surat_spk($id)
     {
         $data = aduan::find($id);
-        $pdf = PDF::loadView('laporan.skl',['data'=>$data])
-            ->setPaper('a4');
-        return $pdf->inline(date("Y-m-d").'.pdf');
+        $view = View::make('laporan.skl', ['data'=>$data]);
+        $contents = (string) $view;
+
+        $pdf = PDF::loadHTML($contents);
+        return $pdf->stream('surat_spk.pdf');
     }
 
 }

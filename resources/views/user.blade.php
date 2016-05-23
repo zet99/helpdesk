@@ -61,5 +61,21 @@
 	</form>
 	</div>
 	</div>
+	<br>
+	<h3>Daftar User Admin</h3>
+	<table class="table table-striped">
+		<tr>
+			<th>Email</th>
+			<th>Nama</th>
+		</tr>
+		<?php foreach ($user as $u) {
+			?>
+		<tr>
+			<td>{{$u->email}}</td>
+			<td>{{$u->name}}</td>
+		</tr>
+			<?
+		} ?>
+	</table>
 	</div>
 @endsection
